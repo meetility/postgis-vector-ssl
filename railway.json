@@ -1,0 +1,36 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "name": "PostgreSQL 18 with PostGIS & pgvector",
+  "description": "PostgreSQL 18 with PostGIS and pgvector extensions",
+  "tags": ["database", "postgres", "postgis", "pgvector"],
+  "services": {
+    "postgres": {
+      "image": "ghcr.io/railwayapp-templates/postgres-ssl:18",
+      "variables": {
+        "POSTGRES_USER": {
+          "description": "PostgreSQL username",
+          "default": "postgres"
+        },
+        "POSTGRES_PASSWORD": {
+          "description": "PostgreSQL password",
+          "default": "${{ secret() }}"
+        },
+        "POSTGRES_DB": {
+          "description": "Default database name",
+          "default": "railway"
+        }
+      },
+      "volumes": {
+        "postgres_data": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      },
+      "healthcheck": {
+        "test": ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"],
+        "interval": 10,
+        "timeout": 5,
+        "retries": 5
+      }
+    }
+  }
+}
