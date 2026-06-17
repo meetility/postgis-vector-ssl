@@ -5,6 +5,7 @@ RUN apt-get update \
  postgresql-18-postgis-3 \
  postgresql-18-pgvector \
  && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /var/lib/postgresql/data \
  && chown -R postgres:postgres /var/lib/postgresql/data
 
 USER postgres
