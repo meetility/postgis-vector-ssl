@@ -30,7 +30,20 @@
         "interval": 10,
         "timeout": 5,
         "retries": 5
-      }
+      },
+      "volumes": {
+        "postgres_data": {
+          "description": "PostgreSQL data directory",
+          "sizeMB": 10240
+        }
+      },
+      "volumeMounts": {
+        "postgres": {
+          "postgres_data": {
+            "mountPath": "/var/lib/postgresql/data"
+          }
+        }
+      }      
     }
   }
 }
